@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import math
+
+radius = 42
+pi = 3.1415926
+
+#формула площади круга
+
+S = pi * radius ** 2
+
+#вывод площади круга с точностью 4
+
+print('площадь круга = ', round(S, 4))
+
+#координаты точeк
+
+point_1 = (23, 34)
+point_2 = (30, 30)
+
+#функция поиска расстояние от заданной точки до начала координат
+
+def distance(x, y):
+   return (x ** 2 + y ** 2) ** 0.5
+
+#вывод результата принадлежности точки к кругу
+
+print( '1 точка - ', distance(point_1[0], point_1[1]) < radius)
+print( '2 точка - ', distance(point_2[0], point_2[1]) < radius)
