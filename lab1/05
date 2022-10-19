@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+zoo = ['lion', 'kangaroo', 'elephant', 'monkey', ]
+birds = ['rooster', 'ostrich', 'lark', ]
+
+#сажаем медведя между львом и кенгуру, выводим список
+
+zoo = zoo[:1] + ['bear'] + zoo[1:]
+print(zoo)
+
+#добавляем птиц из списка birds в последние клетки зоопарка, выводим список
+
+zoo = zoo + birds
+print(zoo)
+
+#убираем слона, выводим список
+
+zoo = zoo[:3] + zoo[4:]
+print(zoo)
+
+#выводим на консоль в какой клетке сидит лев и жаворонок
+
+print('лев сидит в клетке №', zoo.index('lion') + 1, '\n жаваронок сидит в клетке №', zoo.index('lark') + 1)
