@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import simple_draw as sd
+
+sd.resolution = (1200, 600)
+
+# Рисуем пузырек - три вложенных окружностей с шагом 5 пикселей
+
+center = sd.Point(600, 300)
+n = 40
+while 40 <= n <= 50:
+    sd.circle(center, n)
+    n += 5
+
+# Функция рисования пузырька, принимающая 4 параметра: точка рисования , шаг, количество пузырьков и цвет
+
+
+def bubble(point, radius, step, number, color):
+    sd_point = sd.Point(*point)
+    n = 1
+    while number >= n:
+        if n == 1:
+            sd.circle(sd_point, radius, color)
+        elif n == 2:
+            sd.circle(sd_point, radius - step, color)
+        else:
+            sd.circle(sd_point, radius - step * (n - 1), color)
+        n += 1
+
+# Пример
+# bubble((800, 250), 250, 14, 8, ( 255, 0, 0))
+
+# Рисуем 10 пузырьков в ряд
+# TODO здесь ваш код
+
+# Нарисовать три ряда по 10 пузырьков
+# TODO здесь ваш код
+
+# Нарисовать 100 пузырьков в произвольных местах экрана случайными цветами
+# TODO здесь ваш код
+
+sd.pause()
