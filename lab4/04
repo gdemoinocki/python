@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+educational_grant, expenses = 10000, 12000
+n, expenses_10 = 1, 0
+
+while n <= 10:
+    if n == 1:
+        expenses_10 = expenses * 2
+    else:
+        expenses = expenses * 1.03
+        expenses_10 += expenses
+        expenses_10 = round(expenses_10, 2)
+    n += 1
+
+expenses_10 -= educational_grant * 10
+print('Студенту надо попросить', expenses_10, 'рублей')
