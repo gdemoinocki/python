@@ -2,16 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import simple_draw as sd
-sd.resolution = (500, 500)
+sd.resolution = (800, 500)
 
 rainbow_colors = (sd.COLOR_RED, sd.COLOR_ORANGE, sd.COLOR_YELLOW, sd.COLOR_GREEN, sd.COLOR_CYAN, sd.COLOR_BLUE, sd.COLOR_PURPLE)
-center = sd.Point(500, - 600)
+center = sd.Point(300, - 400)
 
-r = 800
+r = 700
 n = 0
 for n in range(7):
-    sd.circle(center_position=center,  radius=r, color=rainbow_colors[n], width=30)
-    r += 30
+    sd.circle(center_position=center,  radius=r, color=rainbow_colors[n], width=28)
+    r += 28
     n += 1
 
 sd.pause()
