@@ -4,13 +4,14 @@
 import simple_draw as sd
 
 brick_color = sd.COLOR_WHITE
+brick_x, brick_y = 100, 50
 step = 0
 
-for y in range(0, 1000, 50):
-    y1 = y + 50
-    step -= 50
-    for x in range(step, 1000, 100):
-        x1 = x + 100
+for y in range(0, 1000, brick_y):
+    y1 = y + brick_y
+    step -= brick_y
+    for x in range(step, 1000, brick_x):
+        x1 = x + brick_x
         left_bottom = sd.Point(x, y)
         right_top = sd.Point(x1, y1)
         sd.rectangle(left_bottom, right_top, color=brick_color, width=3)
