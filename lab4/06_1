@@ -14,8 +14,7 @@ i = 1
 for i in range(7):
     start_x += step
     end_x += step
-    sd.line(start_point = sd.get_point(start_x, start_y), end_point = sd.get_point(end_x, end_y), color = rainbow_colors[i], width = 4)
+    sd.line(start_point=sd.get_point(start_x, start_y), end_point=sd.get_point(end_x, end_y), color=rainbow_colors[i], width=4)
     i += 1
-    print(i)
 
 sd.pause()
