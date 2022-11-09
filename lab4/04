@@ -6,7 +6,7 @@ n, expenses_10 = 1, 0
 
 while n <= 10:
     if n == 1:
-        expenses_10 = expenses * 2
+        expenses_10 = expenses
     else:
         expenses = expenses * 1.03
         expenses_10 += expenses
