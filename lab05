@@ -17,6 +17,7 @@ def lambda_curry2(func):
     return lambda x: lambda y: func(x, y)
 
 
+
 def count_cond(condition):
     """
     Возвращает функцию одного аргумента n, которая считает, сколько из чисел
@@ -45,7 +46,6 @@ def count_cond(condition):
     8
     """
     "*** YOUR CODE HERE ***"
-
     def count_f(n):
         i, count = 1, 0
         while i <= n:
@@ -54,6 +54,7 @@ def count_cond(condition):
             i += 1
         return count
     return count_f
+
 
 
 def compose1(f, g):
@@ -92,6 +93,7 @@ def composite_identity(f, g):
     return lambda x: compose1(f, g)(x) == compose1(g, f)(x)
 
 
+
 def cycle(f1, f2, f3):
     """
     Возвращает функцию, которая сама является функцией высшего порядка.
@@ -122,13 +124,12 @@ def cycle(f1, f2, f3):
     "*** YOUR CODE HERE ***"
     def cycle_n(n):
         def cycle_x(x):
-            func_lst = [f1, f2, f3]
-            i = 0
-            result = x
-            while i < n:
+            cycle_list = [f1, f2, f3]
+            cycle_res = x
+            for i in range(n):
                 ind = i % 3
-                result = func_lst[ind](result)
+                cycle_res = cycle_list[ind](cycle_res)
                 i += 1
-            return result
+            return cycle_res
         return cycle_x
     return cycle_n
