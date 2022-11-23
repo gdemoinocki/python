@@ -129,7 +129,6 @@ def cycle(f1, f2, f3):
             for i in range(n):
                 ind = i % 3
                 cycle_res = cycle_list[ind](cycle_res)
-                i += 1
             return cycle_res
         return cycle_x
     return cycle_n
