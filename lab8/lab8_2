@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+import simple_draw as sd
+
+sd.resolution = (900, 600)
+
+print('Цвета:\n 1. красный\n 2. оранжевый\n 3. желтый\n 4. зеленый\n 5. голубой\n 6. синий\n 7. фиолетовый')
+color_num = input('Введите номер цвета ')
+#print(color_num)
+if int(color_num) > 7 or int(color_num) < 1:
+    print('Вы ввели некорректный номер')
+
+all_color = [sd.COLOR_RED, sd.COLOR_ORANGE, sd.COLOR_YELLOW, sd.COLOR_GREEN, sd.COLOR_CYAN, sd.COLOR_BLUE, sd.COLOR_PURPLE]
+
+
+def geometric_figure (x2, y2, angle2, side_length2, m_n, n, m, m2, v, col):
+    start_p = sd.get_point(x2, y2)
+    if n == 1:
+        v = sd.get_vector(start_p, angle2, side_length2, 3)
+        v.draw(col, None)
+        return geometric_figure(x2, y2, angle2, side_length2, m_n, n + 1, m, m, v, col)
+    elif n > m_n:
+        return 0
+    else:
+        v1 = sd.get_vector(v.end_point, angle2 + m2, side_length2, 3)
+        v1.draw(col, None)
+        if n == m_n -1:
+            sd.line(v1.end_point, sd.get_point(x2, y2), col, 3)
+            return 0
+        return geometric_figure(x2, y2, angle2, side_length2, m_n, n + 1, m, m2 + m, v1, col)
+
+
+def triandle(x, y, angle, side_length, color): #треугольник
+    max_num = 3
+    geometric_figure(x, y, angle, side_length, max_num, 1, 120, 0, 0, color)
+
+
+def square(x, y, angle, side_length, color): #квадрат
+    max_num = 4
+    geometric_figure(x, y, angle, side_length, max_num, 1, 90, 0, 0, color)
+
+
+def pentagon(x, y, angle, side_length, color): #пятиугольник
+    max_num = 5
+    geometric_figure(x, y, angle, side_length, max_num, 1, 72, 0, 0, color)
+
+
+def hexagon(x, y, angle, side_length, color): #шестиугольник
+    max_num = 6
+    geometric_figure(x, y, angle, side_length, max_num, 1, 60, 0, 0, color)
+
+
+triandle(100, 300, 15, 100, all_color[int(color_num) - 1])
+square(200, 400, 0, 150, all_color[int(color_num) - 1])
+pentagon(500, 50, 44, 80, all_color[int(color_num) - 1])
+hexagon(700, 100, 20, 100, all_color[int(color_num) - 1])
+
+sd.pause()
