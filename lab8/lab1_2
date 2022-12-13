@@ -1,0 +1,50 @@
+# -*- coding: utf-8 -*-
+
+import simple_draw as sd
+
+sd.resolution = (900, 600)
+
+# Часть 2
+
+def geometric_figure (x2, y2, angle2, side_length2, m_n, n, m, m2,v):
+    start_p = sd.get_point(x2, y2)
+    if n == 1:
+        v = sd.get_vector(start_p, angle2, side_length2, 3)
+        v.draw()
+        return geometric_figure(x2, y2, angle2, side_length2, m_n, n + 1, m, m, v)
+    elif n > m_n:
+        return 0
+    else :
+        v1 = sd.get_vector(v.end_point, angle2 + m2, side_length2, 3)
+        v1.draw()
+        if n == m_n -1:
+            sd.line(v1.end_point, sd.get_point(x2, y2), sd.COLOR_YELLOW, 3)
+            return 0
+        return geometric_figure(x2, y2, angle2, side_length2, m_n, n + 1, m, m2 + m, v1)
+
+
+def triandle(x, y, angle, side_length): #треугольник
+    max_num = 3
+    geometric_figure(x, y, angle, side_length, max_num, 1, 120, 0, 0)
+
+
+def square(x, y, angle, side_length): #квадрат
+    max_num = 4
+    geometric_figure(x, y, angle, side_length, max_num, 1, 90, 0, 0)
+
+
+def pentagon(x, y, angle, side_length): #пятиугольник
+    max_num = 5
+    geometric_figure(x, y, angle, side_length, max_num, 1, 72, 0, 0)
+
+
+def hexagon(x, y, angle, side_length): #шестиугольник
+    max_num = 6
+    geometric_figure(x, y, angle, side_length, max_num, 1, 60, 0, 0)
+
+
+triandle(100, 300, 15, 100)
+square(200, 400, 0, 150)
+pentagon(500, 50, 44, 80)
+hexagon(700, 100, 20, 100)
+sd.pause()
