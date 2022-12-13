@@ -1,0 +1,81 @@
+# -*- coding: utf-8 -*-
+
+import simple_draw as sd
+
+sd.resolution = (900, 600)
+
+# Часть 1
+
+def triandle(x, y, angle, side_length): #треугольник
+    start_p = sd.get_point(x, y)
+    v1 = sd.get_vector(start_point=start_p, angle=angle, length= side_length, width=3)
+    v1.draw()
+
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 120, length=side_length, width=3)
+    v2.draw()
+
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle + 240, length=side_length, width=3)
+    v3.draw()
+
+
+def square(x, y, angle, side_length): #квадрат
+    start_p = sd.get_point(x, y)
+    v1 = sd.get_vector(start_point=start_p, angle=angle, length= side_length, width=3)
+    v1.draw()
+
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 90, length=side_length, width=3)
+    v2.draw()
+
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle + 180, length=side_length, width=3)
+    v3.draw()
+
+    v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 270, length=side_length, width=3)
+    v4.draw()
+
+
+def pentagon(x, y, angle, side_length): #пятиугольник
+    start_p = sd.get_point(x, y)
+    v1 = sd.get_vector(start_point=start_p, angle=angle, length= side_length, width=3)
+    v1.draw()
+
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 71, length=side_length, width=3)
+    v2.draw()
+
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle + 144, length=side_length, width=3)
+    v3.draw()
+
+    v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 216, length=side_length, width=3)
+    v4.draw()
+
+    v5 = sd.get_vector(start_point=v4.end_point, angle=angle + 288, length=side_length, width=3)
+    v5.draw()
+
+
+def hexagon(x, y, angle, side_length): #шестиугольник
+    start_p = sd.get_point(x, y)
+    v1 = sd.get_vector(start_point=start_p, angle=angle, length= side_length, width=3)
+    v1.draw()
+
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle + 59, length=side_length, width=3)
+    v2.draw()
+
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle + 119, length=side_length, width=3)
+    v3.draw()
+
+    v4 = sd.get_vector(start_point=v3.end_point, angle=angle + 179, length=side_length, width=3)
+    v4.draw()
+
+    v5 = sd.get_vector(start_point=v4.end_point, angle=angle + 240, length=side_length, width=3)
+    v5.draw()
+
+    v6 = sd.get_vector(start_point=v5.end_point, angle=angle + 300, length=side_length, width=3)
+    v6.draw()
+
+triandle(100, 300, 15, 100)
+square(200, 400, 0, 150)
+pentagon(500, 50, 44, 80)
+hexagon(700, 100, 20, 100)
+sd.pause()
+
+
+sd.pause()
