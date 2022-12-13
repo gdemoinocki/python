@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+
+import simple_draw as sd
+
+sd.resolution = (600, 800)
+
+root_point = sd.get_point(300, 30)
+
+
+def draw_branches(point, angle, length, delta):
+    if length < 10:
+        return
+    v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+    v1.draw()
+    next_point = v1.end_point
+    next_angle = angle - delta
+    next_length = length * 0.75
+    for delta in range(-30, 31, 60):
+        draw_branches(point=next_point, angle=next_angle, length=next_length, delta=delta)
+
+for delta in range(-30, 61, 60):
+    draw_branches(point=root_point, angle=90, length=100, delta=delta)
+
+
+sd.pause()
