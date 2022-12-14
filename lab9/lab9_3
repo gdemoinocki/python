@@ -1,0 +1,42 @@
+import my_burger
+
+t = int(input('Доступные рецепты \n 1. двойной чизбургер\n 2. биг мак\n Рецепт какого бургера вы хотите увидить? '))
+
+ingredient_list = []
+
+if t == 1:
+    ingredient_list.append(my_burger.buns())
+    ingredient_list.append(my_burger.cutlets())
+    ingredient_list.append(my_burger.cheese())
+    ingredient_list.append(my_burger.cutlets())
+    ingredient_list.append(my_burger.cheese())
+    ingredient_list.append(my_burger.pickles())
+    ingredient_list.append(my_burger.ketchup())
+    ingredient_list.append(my_burger.mustard())
+    ingredient_list.append(my_burger.buns())
+    for i in ingredient_list:
+        if i != ingredient_list[len(ingredient_list) - 1]:
+            print(f'{i}')
+        else:
+            print(i)
+
+if t == 2:
+    ingredient_list.append(my_burger.buns())
+    ingredient_list.append(my_burger.salad())
+    ingredient_list.append(my_burger.sauce_big_mac())
+    ingredient_list.append(my_burger.cheese())
+    ingredient_list.append(my_burger.cutlets())
+    ingredient_list.append(my_burger.buns())
+    ingredient_list.append(my_burger.sauce_big_mac())
+    ingredient_list.append(my_burger.salad())
+    ingredient_list.append(my_burger.pickles())
+    ingredient_list.append(my_burger.cutlets())
+    ingredient_list.append(my_burger.buns())
+    for i in ingredient_list:
+        if i != ingredient_list[len(ingredient_list) - 1]:
+            print(f'{i}')
+        else:
+            print(i)
+
+elif t > 2 or t < 1:
+    print('Попробуйте ввести другое число')
