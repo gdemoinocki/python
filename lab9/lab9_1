@@ -1,0 +1,4 @@
+from pack1.room_1 import folks
+print('В комнате room_1 живут:', folks[0], 'и', folks[1])
+from pack1.room_2 import folks
+print('В комнате room_2 живёт:', folks[0])
