@@ -1,0 +1,23 @@
+def buns():
+    return 'добавим булочку'
+
+def cutlets():
+    return 'теперь добавляется котлета '
+
+def pickles():
+    return 'далее соленые огурчики'
+
+def ketchup():
+    return 'добавим кетчуп'
+
+def mustard():
+    return 'добавим горчицу'
+
+def cheese():
+    return 'добавим сыр'
+
+def sauce_big_mac():
+    return 'добавим соус "биг мак"'
+
+def salad():
+    return 'добавим салат'
