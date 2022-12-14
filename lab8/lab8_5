@@ -1,0 +1,44 @@
+# -*- coding: utf-8 -*-
+# import pygame
+import simple_draw as sd
+
+sd.resolution = (1200, 800)
+
+N = 20
+j = 1
+i = 0
+
+def snowflake_gen():
+    return [sd.random_number(10, 25), sd.random_number(5, 1195), sd.random_number(900, 950)]
+
+snowflakes = []
+
+for j in range(N):
+    snowflakes.append(snowflake_gen())
+
+sd.start_drawing()
+while True:
+    #sd.clear_screen()
+    sd.draw_background()
+
+    for snowflake in snowflakes:
+        point = sd.get_point(snowflake[1], snowflake[2])
+        sd.snowflake(point, snowflake[0], sd.background_color)
+
+        snowflake[1] -= sd.random_number(-10, 10)
+        snowflake[2] -= sd.random_number(5, 10)
+
+        point = sd.get_point(snowflake[1], snowflake[2])
+        sd.snowflake(point, snowflake[0])
+        if snowflake[2] < -10:
+            snowflakes.remove(snowflake)
+
+    snowflake_2 = snowflake_gen()
+    snowflakes.append(snowflake_gen())
+
+    sd.finish_drawing()
+    sd.sleep(0.075)
+    if sd.user_want_exit():
+        break
+
+sd.pause()
