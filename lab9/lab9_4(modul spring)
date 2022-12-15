@@ -1,0 +1,95 @@
+import simple_draw as sd
+from random import randint
+
+def squar(x, y, sid, col, wid):
+    left_b = sd.Point(x, y)
+    sd.square(left_b, sid, col, wid)
+
+def rec(x, y, sid, col, wid):
+    left_b = sd.Point(x, y)
+    sd.rectangle(left_b, sid, col, wid)
+
+def brick(brick_x, brick_y, step):
+    brick_color = sd.COLOR_WHITE
+    i = 1
+    for y in range(120, 430, brick_y):
+        y1 = y + brick_y
+        step -= brick_y
+        for x in range(step, 700, brick_x):
+            x1 = x + brick_x
+            left_bottom = sd.Point(x, y)
+            right_top = sd.Point(x1, y1)
+            sd.rectangle(left_bottom, right_top, brick_color, 1)
+
+
+
+def smile(smile_x, smile_y):
+    center = sd.Point(smile_x, smile_y)
+    sd.circle(center, radius=50, color=sd.COLOR_WHITE, width=0)
+    sd.circle(center, radius=50, color=sd.COLOR_BLACK, width=1)
+    center_1 = sd.Point(smile_x - 25, smile_y + 6)
+    sd.circle(center_1, radius=10, color=sd.COLOR_BLACK, width=1)
+    center_1 = sd.Point(smile_x + 25, smile_y + 6)
+    sd.circle(center_1, radius=10, color=sd.COLOR_BLACK, width=1)
+    center_1 = sd.Point(smile_x - 25, smile_y + 6)
+    sd.circle(center_1, radius=4, color=sd.COLOR_BLACK, width=0)
+    center_1 = sd.Point(smile_x + 25, smile_y + 6)
+    sd.circle(center_1, radius=4, color=sd.COLOR_BLACK, width=0)
+    center_1 = sd.Point(smile_x, smile_y - 25)
+    sd.circle(center_1, radius=12, color=sd.COLOR_BLACK, width=0)
+    sd.line(start_point=sd.Point(smile_x + 10, smile_y + 30), end_point=sd.Point(smile_x + 30, smile_y + 20), color=sd.COLOR_BLACK, width=1)
+    sd.line(start_point=sd.Point(smile_x - 10, smile_y + 30), end_point=sd.Point(smile_x - 30, smile_y + 20), color=sd.COLOR_BLACK, width=1)
+
+
+def line(x, y, angle, length, color, width):
+    start_p = sd.get_point(x, y)
+    sd.vector(start_p, angle, length, color, width)
+
+def roof(point_lst):
+    sd.polygon( point_lst, sd.COLOR_DARK_RED, 0)
+
+def rainbow():
+    rainbow_colors = (sd.COLOR_RED, sd.COLOR_ORANGE, sd.COLOR_YELLOW, sd.COLOR_GREEN, sd.COLOR_CYAN, sd.COLOR_BLUE, sd.COLOR_PURPLE)
+    center = sd.Point(300, - 100)
+    r = 850
+    n = 0
+    for n in range(7):
+        sd.circle(center_position=center, radius=r, color=rainbow_colors[n], width=15)
+        r += 15
+        n += 1
+
+def three():
+    root_point = sd.get_point(300, 30)
+    def draw_branches(point, angle, length, delta):
+        if length < 10:
+            return
+        v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+        v1.draw(sd.COLOR_GREEN, None)
+        next_point = v1.end_point
+        next_angle = angle - delta
+        next_length = length * 0.75
+        for delta in range(-30, 31, 60):
+            draw_branches(point=next_point, angle=next_angle, length=next_length, delta=delta)
+
+    for delta in range(-30, 61, 60):
+        draw_branches(point=root_point, angle=90, length=100, delta=delta)
+
+def snow():
+    def sn(z):
+        if z > 0:
+            x = randint(5, 400)
+            y = randint(5, 30)
+            center = sd.get_point(x, y)
+            sd.snowflake(center, 8, sd.COLOR_WHITE, 0.6, 0.35, 60)
+            return sn(z - 1)
+        return 0
+    sn(150)
+
+def sun():
+    center = sd.Point(70, 550)
+    sd.circle(center, 40, sd.COLOR_YELLOW, 0)
+    line( 5, 480, 50, 70, sd.COLOR_YELLOW, 5)
+    line( 40, 465, 65, 70, sd.COLOR_YELLOW, 5)
+    line( 90, 460, 95, 70, sd.COLOR_YELLOW, 5)
+    line(150, 485,140, 70, sd.COLOR_YELLOW, 5)
+    line(150, 570, 180, 70, sd.COLOR_YELLOW, 5)
