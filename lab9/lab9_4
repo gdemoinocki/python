@@ -1,0 +1,37 @@
+import simple_draw as sd
+import spring
+
+sd.resolution = (1000, 600)
+
+spring.rainbow()
+
+spring.squar(400, 120, 320, sd.COLOR_DARK_ORANGE, 0)
+
+spring.brick(50, 20, 420)
+
+
+spring.squar(0, 100, 400, sd.background_color, 0)
+spring.squar(720, 100, 250, sd.background_color, 0)
+spring.squar(720, 300, 150, sd.background_color, 0)
+spring.squar(720, 155, 100, sd.background_color, 0)
+
+spring.squar(400, 120, 320, sd.COLOR_WHITE, 1)
+
+spring.squar(500, 230, 130, sd.COLOR_BLUE, 0)
+spring.squar(500, 230, 130, sd.COLOR_ORANGE, 1)
+
+spring.smile(565, 280)
+
+spring.line(500, 290, 0, 130, sd.COLOR_ORANGE, 1)
+spring.line(565, 232, 90, 130, sd.COLOR_ORANGE, 1)
+
+point_list =[sd.get_point(320, 440), sd.get_point(560, 530), sd.get_point(800, 440)]
+spring.roof(point_list)
+
+spring.three()
+
+spring.snow()
+
+spring.sun()
+
+sd.pause()
