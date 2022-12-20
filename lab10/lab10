@@ -1,0 +1,199 @@
+import sys
+sys.path.append('.../.../')
+from lab10_pack import rectangle
+from lab10_pack import triangle
+from lab10_pack import trapezoid
+from appJar import gui
+#import docx
+
+app = gui('Геометрические фигуры')
+
+
+#Выбор фигуры
+app.addLabel('lbl1', 'Даны фигуры:\n 1) прямоугольник\n 2) треугольник\n 3) трапеция', 0, 0, 1)
+app.setLabelBg('lbl1', 'grey')
+app.addEntry('entry_0', 0, 1, 4)
+app.setEntryDefault('entry_0', 'Введите номер фигуры(просто цифру)')
+
+
+#Площадь фигуры
+app.addLabel('lbl2', 'Для поиска площади введите:\n 1) ширину (a) и длинну (b) прямоугольника\n 2) основание (a) и высоту (h) треугольника\n '
+                     '3) верхнее(a) и нижнее(b) основания и высоту(h) трапеции', 1, 0, 0)
+app.setLabelBg('lbl2', 'green')
+
+
+#Радиус описанной окружности
+app.addLabel('lbl3', 'Для поиска радиуса описанной окружности введите:\n 1) ширину (a) и длинну (b) прямоугольника\n '
+                     '2) длинны сторон(a, b, c) и высоту (h) треугольника\n 3) длинны сторон(a, b, c) и высоту(h) трапеции', 2, 0, 0)
+app.setLabelBg('lbl3', 'yellow')
+
+
+#Радиус вписанной окружности
+app.addLabel('lbl4', 'Для поиска радиуса вписанной окружности введите:\n '
+                     '2) длинны сторон(a, b, c) и высоту (h) треугольника\n 3) высоту(h) трапеции', 3, 0, 0)
+app.setLabelBg('lbl4', 'orange')
+
+
+#Ввод переменных
+app.addEntry('entry_1', 1, 1, 0)
+app.setEntryDefault('entry_1', 'Введите a')
+app.addEntry('entry_2', 1, 2, 0)
+app.setEntryDefault('entry_2', 'Введите b')
+app.addEntry('entry_3', 2, 1, 0)
+app.setEntryDefault('entry_3', 'Введите h')
+app.addEntry('entry_4', 2, 2, 0)
+app.setEntryDefault('entry_4', 'Введите с')
+
+
+def error0():
+    try:
+        int(app.getEntry('entry_0'))
+    except ValueError:
+        return 0
+    return 1
+
+
+def error1():
+    try:
+        int(app.getEntry('entry_0'))
+        int(app.getEntry('entry_1'))
+    except ValueError:
+        return 0
+    return 1
+
+
+def error2():
+    try:
+        int(app.getEntry('entry_0'))
+        int(app.getEntry('entry_2'))
+    except ValueError:
+        return 0
+    return 1
+
+
+def error3():
+    try:
+        int(app.getEntry('entry_0'))
+        int(app.getEntry('entry_3'))
+    except ValueError:
+        return 0
+    return 1
+
+
+def error4():
+    try:
+        int(app.getEntry('entry_0'))
+        int(app.getEntry('entry_4'))
+    except ValueError:
+        return 0
+    return 1
+
+
+#Функция поиска площади фигуры
+def press1(btnName):
+    if error0() == 1:
+        x = int(app.getEntry('entry_0'))
+        if x < 1 or x > 3:
+            app.infoBox('Ошибка', 'Вы ввели значение "x" выходящее за рамки допустимых значений, попробуйте ввести другое число')
+        elif x == 1 and error1() == 1 and error2() == 1:
+            if app.getEntry('entry_3') == '' and app.getEntry('entry_4') == '':
+                a = int(app.getEntry('entry_1'))
+                b = int(app.getEntry('entry_2'))
+                app.infoBox('Площадь прямоугольника', str(rectangle.recangle_area(a, b)))
+                #docx.makeelement(tagname = 't', tagtext=None, nsprefix='w')
+            else:
+                app.infoBox('Ошибка', 'Вы ввели лишнии значения')
+        elif x == 2 and error1() == 1 and error3() == 1:
+            if app.getEntry('entry_2') == '' and app.getEntry('entry_4') == '':
+                a = int(app.getEntry('entry_1'))
+                h = int(app.getEntry('entry_3'))
+                app.infoBox('Площадь треугольника', str(triangle.triangle_area(a, h)))
+            else:
+                app.infoBox('Ошибка', 'Вы ввели лишнии значения')
+        elif x == 3 and error1() == 1 and error2() == 1 and error3() == 1:
+            if app.getEntry('entry_4') == '':
+                a = int(app.getEntry('entry_1'))
+                b = int(app.getEntry('entry_2'))
+                h = int(app.getEntry('entry_3'))
+                app.infoBox('Площадь трапеции', str(trapezoid.trapezoid_area(a, b, h)))
+            else:
+                app.infoBox('Ошибка', 'Вы ввели лишнии значения')
+        else:
+            app.infoBox('Ошибка', 'Вы не ввели все нужные значения')
+    else:
+        app.infoBox('Ошибка', 'Вы ввели не корректное значение, попробуйте ввести другое')
+
+
+#Функция поиска радиуса описанной окружности фигуры
+def press2(btnName):
+    if error0() == 1:
+        x = int(app.getEntry('entry_0'))
+        if x < 1 or x > 3:
+            app.infoBox('Ошибка',
+                        'Вы ввели значение "x" выходящее за рамки допустимых значений, попробуйте ввести другое число')
+        elif x == 1 and error1() == 1 and error2() == 1:
+            if app.getEntry('entry_3') == '' and app.getEntry('entry_4') == '':
+                a = int(app.getEntry('entry_1'))
+                b = int(app.getEntry('entry_2'))
+                app.infoBox('Радиус описанной окружности прямоугольника', str(rectangle.recangle_area(a, b)))
+            else:
+                app.infoBox('Ошибка', 'Вы ввели лишнии значения')
+        elif x == 2 and error1() == 1 and error2() == 1 and error3() == 1 and error4() == 1:
+            a = int(app.getEntry('entry_1'))
+            b = int(app.getEntry('entry_2'))
+            h = int(app.getEntry('entry_3'))
+            c = int(app.getEntry('entry_4'))
+            app.infoBox('Радиус описанной окружности треугольника', str(triangle.radius_c_circle_trian(a, b, c, h)))
+        elif x == 3 and error1() == 1 and error2() == 1 and error3() == 1 and error4() == 1:
+            a = int(app.getEntry('entry_1'))
+            b = int(app.getEntry('entry_2'))
+            h = int(app.getEntry('entry_3'))
+            c = int(app.getEntry('entry_4'))
+            app.infoBox('Радиус описанной окружности трапеции', str(trapezoid.radius_c_circle_trap(a, b, c, h)))
+        else:
+            app.infoBox('Ошибка', 'Вы не ввели все нужные значения')
+    else:
+        app.infoBox('Ошибка', 'Вы ввели не корректное значение, попробуйте ввести другое')
+
+
+#Функция поиска радиуса вписанной окружности фигуры
+def press3(btnName):
+    #a = int(app.getEntry('entry_1'))
+    if error0() == 1:
+        x = int(app.getEntry('entry_0'))
+        if x < 1 or x > 3:
+            app.infoBox('Ошибка',
+                        'Вы ввели значение "x" выходящее за рамки допустимых значений, попробуйте ввести другое число')
+        elif x == 1:
+                app.infoBox('Ошибка', str(rectangle.radius_i_circle_rect()))
+        elif x == 2 and error1() == 1 and error3() == 1:
+            a = int(app.getEntry('entry_1'))
+            b = int(app.getEntry('entry_2'))
+            h = int(app.getEntry('entry_3'))
+            c = int(app.getEntry('entry_4'))
+            app.infoBox('Радиус вписанной окружности треугольника', str(triangle.radius_i_circle_trian(a,  b, c, h)))
+        elif x == 3 and error1() == 1 and error2() == 1 and error3() == 1:
+            if app.getEntry('entry_1') == '' and app.getEntry('entry_2') == '' and app.getEntry('entry_4') == '':
+                h = int(app.getEntry('entry_3'))
+                app.infoBox('Радиус вписанной окружности трапеции', str(trapezoid.radius_i_circle_trap(h)))
+            else:
+                app.infoBox('Ошибка', 'Вы ввели лишнии значения')
+        else:
+            app.infoBox('Ошибка', 'Вы не ввели все нужные значения')
+    else:
+        app.infoBox('Ошибка', 'Вы ввели не корректное значение, попробуйте ввести другое')
+
+
+def cansel():
+    app.stop()
+
+#Кнопки
+app.addButtons( ['Узнать площадь фигуры'], press1, 1, 7, 0)
+
+app.addButtons( ['Узнать радиус описанной окружности фигуры'], press2, 2, 7, 0)
+
+app.addButtons( ['Узнать радиус вписанной окружности фигуры'], press3, 3, 7, 0)
+
+app.addButtons( ['Закрыть'], press3, 4, 7, 0)
+
+app.go()
