@@ -4,7 +4,8 @@ from lab10_pack import rectangle
 from lab10_pack import triangle
 from lab10_pack import trapezoid
 from appJar import gui
-#import docx
+import docx
+doc = docx.Document()
 
 app = gui('Геометрические фигуры')
 
@@ -100,7 +101,8 @@ def press1(btnName):
                 a = int(app.getEntry('entry_1'))
                 b = int(app.getEntry('entry_2'))
                 app.infoBox('Площадь прямоугольника', str(rectangle.recangle_area(a, b)))
-                #docx.makeelement(tagname = 't', tagtext=None, nsprefix='w')
+                y = 'Площадь прямоугольника = ' + str(rectangle.recangle_area(a, b))
+                doc.add_paragraph(y)
             else:
                 app.infoBox('Ошибка', 'Вы ввели лишнии значения')
         elif x == 2 and error1() == 1 and error3() == 1:
@@ -108,6 +110,8 @@ def press1(btnName):
                 a = int(app.getEntry('entry_1'))
                 h = int(app.getEntry('entry_3'))
                 app.infoBox('Площадь треугольника', str(triangle.triangle_area(a, h)))
+                y = 'Площадь треугольника = ' + str(triangle.triangle_area(a, h))
+                doc.add_paragraph(y)
             else:
                 app.infoBox('Ошибка', 'Вы ввели лишнии значения')
         elif x == 3 and error1() == 1 and error2() == 1 and error3() == 1:
@@ -116,6 +120,8 @@ def press1(btnName):
                 b = int(app.getEntry('entry_2'))
                 h = int(app.getEntry('entry_3'))
                 app.infoBox('Площадь трапеции', str(trapezoid.trapezoid_area(a, b, h)))
+                y = 'Площадь трапеции = ' + str(trapezoid.trapezoid_area(a, b, h))
+                doc.add_paragraph(y)
             else:
                 app.infoBox('Ошибка', 'Вы ввели лишнии значения')
         else:
@@ -136,6 +142,8 @@ def press2(btnName):
                 a = int(app.getEntry('entry_1'))
                 b = int(app.getEntry('entry_2'))
                 app.infoBox('Радиус описанной окружности прямоугольника', str(rectangle.recangle_area(a, b)))
+                y = 'Радиус описанной окружности прямоугольника = ' + str(rectangle.recangle_area(a, b))
+                doc.add_paragraph(y)
             else:
                 app.infoBox('Ошибка', 'Вы ввели лишнии значения')
         elif x == 2 and error1() == 1 and error2() == 1 and error3() == 1 and error4() == 1:
@@ -144,12 +152,16 @@ def press2(btnName):
             h = int(app.getEntry('entry_3'))
             c = int(app.getEntry('entry_4'))
             app.infoBox('Радиус описанной окружности треугольника', str(triangle.radius_c_circle_trian(a, b, c, h)))
+            y = 'Радиус описанной окружности треугольника = ' + str(triangle.radius_c_circle_trian(a, b, c, h))
+            doc.add_paragraph(y)
         elif x == 3 and error1() == 1 and error2() == 1 and error3() == 1 and error4() == 1:
             a = int(app.getEntry('entry_1'))
             b = int(app.getEntry('entry_2'))
             h = int(app.getEntry('entry_3'))
             c = int(app.getEntry('entry_4'))
             app.infoBox('Радиус описанной окружности трапеции', str(trapezoid.radius_c_circle_trap(a, b, c, h)))
+            y = 'Радиус описанной окружности трапеции = ' + str(trapezoid.radius_c_circle_trap(a, b, c, h))
+            doc.add_paragraph(y)
         else:
             app.infoBox('Ошибка', 'Вы не ввели все нужные значения')
     else:
@@ -172,10 +184,14 @@ def press3(btnName):
             h = int(app.getEntry('entry_3'))
             c = int(app.getEntry('entry_4'))
             app.infoBox('Радиус вписанной окружности треугольника', str(triangle.radius_i_circle_trian(a,  b, c, h)))
+            y = 'Радиус вписанной окружности треугольника = ' + str(triangle.radius_i_circle_trian(a,  b, c, h))
+            doc.add_paragraph(y)
         elif x == 3 and error1() == 1 and error2() == 1 and error3() == 1:
             if app.getEntry('entry_1') == '' and app.getEntry('entry_2') == '' and app.getEntry('entry_4') == '':
                 h = int(app.getEntry('entry_3'))
                 app.infoBox('Радиус вписанной окружности трапеции', str(trapezoid.radius_i_circle_trap(h)))
+                y = 'Радиус вписанной окружности трапеции = ' + str(trapezoid.radius_i_circle_trap(h))
+                doc.add_paragraph(y)
             else:
                 app.infoBox('Ошибка', 'Вы ввели лишнии значения')
         else:
@@ -194,6 +210,12 @@ app.addButtons( ['Узнать радиус описанной окружнос�
 
 app.addButtons( ['Узнать радиус вписанной окружности фигуры'], press3, 3, 7, 0)
 
-app.addButtons( ['Закрыть'], press3, 4, 7, 0)
+app.addButtons( ['Закрыть'], cansel, 4, 7, 0)
 
 app.go()
+
+doc.save('report_lab10.docx')
+text = []
+for paragraph in doc.paragraphs:
+    text.append(paragraph.text)
+print('\n'.join(text))
