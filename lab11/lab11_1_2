@@ -1,0 +1,77 @@
+# -*- coding: utf-8 -*-
+
+import simple_draw as sd
+
+sd.resolution = (1000, 700)
+
+
+class Snowflake:
+    pass
+    def __init__(self, snowflake):
+        """"Начальные данные снежинки"""
+        self.x = snowflake[1]
+        self.y = snowflake[2]
+        self.lenght = snowflake[0]
+
+    def clear_previous_picture(self):
+        """Очистить предыдущее изображение"""
+        point = sd.get_point(self.x, self.y)
+        sd.snowflake(point, self.lenght, sd.background_color)
+
+    def move(self):
+        """Изменение координат снежинки"""
+        self.x -= sd.random_number(-10, 10)
+        self.y -= sd.random_number(5, 10)
+
+    def draw(self):
+        """"Отрисовка снежинок"""
+        point = sd.get_point(self.x, self.y)
+        sd.snowflake(point, self.lenght)
+
+    def can_fall(self):
+        """Проверка, могут ли падать снежинки"""
+        if self.x < -15 or self.y < -15:
+            return 0
+        return 1
+
+
+def get_flakes(count):
+    snowflakes = []
+    for j in range(count):
+        snowflakes.append(Snowflake([sd.random_number(10, 25), sd.random_number(5, 995), sd.random_number(730, 770)]))
+    return snowflakes
+
+
+def get_fallen_flakes(count):
+    for i in flakes:
+        if not i.can_fall():
+            count += 1
+    return count
+
+
+def append_flakes(count):
+    append_snowflakes = []
+    for i in flakes:
+        if i.can_fall():
+            append_snowflakes.append(i)
+    flakes.clear()
+    flakes.extend(append_snowflakes)
+    flakes.extend(get_flakes(count))
+
+
+flakes = get_flakes(count=20)
+
+while True:
+    i = 0
+    for flake in flakes:
+        flake.clear_previous_picture()
+        flake.move()
+        flake.draw()
+        i+=1
+    fallen_flakes = get_fallen_flakes(0)
+    append_flakes(fallen_flakes)
+    sd.sleep(0.09)
+    if sd.user_want_exit():
+        break
+
+sd.pause()
