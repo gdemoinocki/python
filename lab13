@@ -1,9 +1,10 @@
 from tkinter import *
 from tkinter import messagebox
-from tkinter.ttk import Frame, Button, Style, Combobox, Label, Widget
+from tkinter.ttk import Button, Combobox, Label
 from lab10_pack import rectangle
 from lab10_pack import triangle
 from lab10_pack import trapezoid
+import docx
 
 
 class Window:
@@ -21,6 +22,9 @@ class Window:
         self.b_entry = Entry(self.root, width=10)
         self.c_entry = Entry(self.root, width=10)
         self.h_entry = Entry(self.root, width=10)
+        self.text1 = 'еее'
+        self.doc = docx.Document()
+
 
     def run(self):
         self.draw_widgets()
@@ -60,19 +64,22 @@ class Window:
 
 
         #Кнопки
-
         Button(self.root, text='Узнать площадь фигуры',  width=30, command=self.get_area).grid(row=1, column=5, sticky=W)
 
         Button(self.root, text='Узнать радиус описанной окружности фигуры', width=45, command=self.get_radius_c_circle).grid(row=2, column=5, sticky=W)
 
         Button(self.root, text='Узнать радиус описанной окружности фигуры', width=45, command=self.get_radius_i_circle).grid(row=3, column=5, sticky=W)
+        Button(self.root, text='Запись', width=45,
+               command=self.submit).grid(row=4, column=5, sticky=W)
 
     #Функции для кнопок
     # Площадь
     def get_area(self):
         s = self.shape.get()
+
         if s != 'прямоугольник' and s != 'треугольник' and s != 'трапеция':
             messagebox.showerror('Ошибка', 'Вы не выбрали фигуру')
+
         elif s == 'прямоугольник':
             try:
                 int(self.a_entry.get())
@@ -82,7 +89,7 @@ class Window:
             a = int(self.a_entry.get())
             b = int(self.b_entry.get())
             res = str('Площадь прямоугольника со сторонами ' + str(a) +' и '+ str(b) + ' = ' + str(rectangle.recangle_area(a, b)))
-            messagebox.showinfo("Площадь фигуры", res)
+
         elif s == 'треугольник':
             try:
                 int(self.a_entry.get())
@@ -93,7 +100,7 @@ class Window:
             h = int(self.h_entry.get())
             res = str('Площадь треугольника со стороной ' + str(a) + ' и высотой ' + str(h) + ' = ' + str(
                 triangle.triangle_area(a, h)))
-            messagebox.showinfo("Площадь фигуры", res)
+
         elif s == 'трапеция':
             try:
                 int(self.a_entry.get())
@@ -106,15 +113,17 @@ class Window:
             h = int(self.h_entry.get())
             res = str('Площадь трапеции со сторонами ' + str(a) + ', ' + str(b) + ' и высотой ' + str(h) + ' = ' + str(
                 trapezoid.trapezoid_area(a, b, h)))
-            messagebox.showinfo("Площадь фигуры", res)
+        messagebox.showinfo("Площадь фигуры", res)
+        self.text1 = res
 
 
     #Радиус описанной окружности
     def get_radius_c_circle(self):
-        res = ''
         s = self.shape.get()
+
         if s != 'прямоугольник' and s != 'треугольник' and s != 'трапеция':
             messagebox.showerror('Ошибка', 'Вы не выбрали фигуру')
+
         elif s == 'прямоугольник':
             try:
                 int(self.a_entry.get())
@@ -125,6 +134,7 @@ class Window:
             b = int(self.b_entry.get())
             res = str('Радиус описанной окружности прямоугольника со сторонами ' + str(a) +' и '+ str(b) + ' = ' +
                       str(rectangle.radius_c_circle_rect(a, b)))
+
         elif s == 'треугольник':
             try:
                 int(self.a_entry.get())
@@ -139,6 +149,7 @@ class Window:
             h = int(self.h_entry.get())
             res = str('Радиус описанной окружности треугольника со сторонами ' + str(a) + ', ' + str(b) + ', '+ str(c)
                       + ' и высотой ' + str(h) + ' = ' + str(triangle.radius_c_circle_trian(a, b, c, h)))
+
         elif s == 'трапеция':
             try:
                 int(self.a_entry.get())
@@ -154,14 +165,17 @@ class Window:
             res = str('Площадь трапеции со сторонами ' + str(a) + ', ' + str(b) + ', '+ str(c) + ' и высотой ' + str(h) + ' = ' + str(
                 trapezoid.radius_c_circle_trap(a, b, c, h)))
         messagebox.showinfo("Радиус описанной окружности фигуры", res)
+        self.text1 = res
+
 
 
     #Радиус вписанной окружности
     def get_radius_i_circle(self):
         s = self.shape.get()
-        res = ''
+
         if s != 'прямоугольник' and s != 'треугольник' and s != 'трапеция':
             messagebox.showerror('Ошибка', 'Вы не выбрали фигуру')
+
         elif s == 'прямоугольник':
             try:
                 int(self.a_entry.get())
@@ -173,6 +187,7 @@ class Window:
             res = str(
                 'Радиус вписанной окружности прямоугольника со сторонами ' + str(a) + ' и ' + str(b) + ' = ' + str(
                     rectangle.radius_i_circle_rect(a, b)))
+
         elif s == 'треугольник':
             try:
                 int(self.a_entry.get())
@@ -187,6 +202,7 @@ class Window:
             h = int(self.h_entry.get())
             res = str('Радиус вписанной окружности треугольника со сторонами ' + str(a) + ', ' + str(b) + ', '+ str(c)
                       + ' и высотой ' + str(h) + ' = ' + str(triangle.radius_c_circle_trian(a, b, c, h)))
+
         elif s == 'трапеция':
             try:
                 int(self.h_entry.get())
@@ -195,6 +211,17 @@ class Window:
             h = int(self.h_entry.get())
             res = str('Площадь трапеции с высотой ' + str(h) + ' = ' + str(trapezoid.radius_i_circle_trap(h)))
         messagebox.showinfo("Радиус вписанной окружности фигуры", res)
+        self.text1 = res
+
+
+    def submit(self):
+        get1 = self.text1
+        self.doc.add_paragraph(get1)
+        self.doc.save('lab13_res.docx')
+        text = []
+        for paragraph in self.doc.paragraphs:
+            text.append(paragraph.text)
+            print('\n'.join(text))
 
 
 if __name__ == "__main__":
